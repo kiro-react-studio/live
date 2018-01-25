@@ -54,10 +54,10 @@ live demo , H5直播探索demo, 只适配移动端，正在进行中
 
 ### 效果预览
 
-![运行效果](https://raw.githubusercontent.com/lduoduo/live/master/preview/im1.png)
-![运行效果](https://raw.githubusercontent.com/lduoduo/live/master/preview/im2.png)
-![运行效果](https://raw.githubusercontent.com/lduoduo/live/master/preview/im3.png)
-![运行效果](https://raw.githubusercontent.com/lduoduo/live/master/preview/im4.png)
+<div align="center"><img width="300" src="https://raw.githubusercontent.com/lduoduo/live/master/preview/im1.png"/></div>
+<div align="center"><img width="300" src="https://raw.githubusercontent.com/lduoduo/live/master/preview/im2.png"/></div>
+<div align="center"><img width="300" src="https://raw.githubusercontent.com/lduoduo/live/master/preview/im3.png"/></div>
+<div align="center"><img width="300" src="https://raw.githubusercontent.com/lduoduo/live/master/preview/im4.png"/></div>
 
 ### 参考资料
 1. [Preact](https://preactjs.com/)
