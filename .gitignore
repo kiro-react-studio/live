@@ -1,0 +1,13 @@
+node_modules
+.vscode
+test
+*.bk
+.DS_Store
+.cache
+dist
+production
+data
+output
+ssh
+*_test
+*.map

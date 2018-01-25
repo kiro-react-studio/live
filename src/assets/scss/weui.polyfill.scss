@@ -1,0 +1,139 @@
+body {
+    color: #3e3e3e;
+    // background: url('../images/bg.jpg') center no-repeat;
+    background-image: linear-gradient(145deg,#71230c,#2b7d53,#3e3e67);
+}
+
+.hide {
+    display: none;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+.iconfont {
+    font-size: 20px;
+    color: #aaa;
+    &.success {
+        color: #48a947;
+    }
+    &.important {
+        color: red;
+    }
+}
+
+.preview {
+    position: fixed;
+    top: 0;
+    left: 0;
+    .preview-item-remote {
+        position: absolute;
+        top: 10%;
+        right: 10%;
+    }
+}
+
+.weui-btn-group {
+    margin: 15px 0;
+}
+
+.weui-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 11;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+}
+
+.weui-setting {
+    position: absolute;
+    z-index: 11;
+    left: 0;
+    width: 100%;
+    min-height: 100%;
+    background-color: #F8F8F8;
+}
+
+.weui-setting-icon {
+    background: #ffffff80;
+    padding: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    &:before {
+        line-height: 1;
+        font-size: 40px;
+        text-align: center;
+        vertical-align: middle;
+    }
+    &.iconfont {
+        color: #888686;
+    }
+}
+
+.page {
+    // background: url('../images/bg.jpg') center no-repeat;
+    background-image: linear-gradient(145deg,#71230c,#2b7d53,#3e3e67);
+}
+
+.page.home {
+    &.setting {
+        background: #F8F8F8;
+    }
+    .page__hd {
+        padding: 0;
+        height: 60px;
+        text-align: center;
+        /* height: 40px; */
+        /* line-height: 1; */
+        background: #fff;
+        border-bottom: 1px solid #ddd;
+        position: fixed;
+        z-index: 111;
+        width: 100%;
+        box-sizing: border-box;
+        display: flex;
+    }
+    .page__hd__item {
+        flex: 1;
+        line-height: 60px;
+        min-width: 60px;
+    }
+    .page__title {
+        flex: 3;
+        font-size: 16px;
+        font-weight: 400;
+        text-align: center;
+        line-height: 60px;
+        margin-bottom: 0;
+    }
+    .page__desc {
+        /* margin-top: 5px; */
+        color: #888888;
+        font-size: 13px;
+        text-align: center;
+        height: 20px;
+        line-height: 1;
+    }
+    .page__bd {
+        margin-top: 70px;
+    }
+    .weui-tab {
+        height: 40px;
+    }
+}
+
+.weui-flex__item__desc {
+    flex: 3;
+    color: #aaa;
+}
+
+.preact-tip-docker {
+    .weui-toptips {
+        display: block;
+        background: rgba(140, 101, 165, 0.6);
+    }
+}

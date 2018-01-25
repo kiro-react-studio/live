@@ -1,0 +1,27 @@
+{
+    "presets": ["env", "preact", "es2015", "stage-0", "stage-1"],
+    "plugins": [
+      [
+        "module-resolver",
+        {
+          "root": ["./src"],
+          "alias": {
+            "test": "./test",
+            "flow": "./src/flow",
+            "util": "./src/util",
+            "weui": "./src/weui",
+            "assets": "./src/assets",
+            "layout": "./src/weui/layout",
+            "images": "./src/assets/images",
+            "store": "./src/store",
+            "store.action": "./src/store.action",
+            "data": "./data",
+            "module": "./module"
+          }
+        }
+      ],
+      ["transform-decorators-legacy"],
+      ["transform-react-jsx", { "pragma": "h" }]
+    ]
+  }
+  
