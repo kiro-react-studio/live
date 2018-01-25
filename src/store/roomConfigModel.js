@@ -26,12 +26,29 @@ export default class RoomConfig {
     this.state = Object.assign(this.state, obj);
   }
 
+  // 设置自己的uid
   @action
   setUid(uid) {
     console.log('store --> Room -> setUid', uid);
     this.state.uid = uid;
     console.log(this.state);
     Storage.set('uid', uid)
+  }
+
+  // 设置主播uid
+  @action
+  setHostUid(uid) {
+    console.log('store --> Room -> setHostUid', uid);
+    this.state.hostUid = uid;
+    console.log(this.state);
+  }
+
+  // 设置当前房间
+  @action
+  setRoom(room) {
+    console.log('store --> Room -> setRoom', room);
+    this.state.room = room;
+    console.log(this.state);
   }
 
   @action

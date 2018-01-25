@@ -2,7 +2,7 @@
  * @Author: lduoduo 
  * @Date: 2018-01-13 23:44:01 
  * @Last Modified by: lduoduo
- * @Last Modified time: 2018-01-25 19:26:48
+ * @Last Modified time: 2018-01-25 23:37:56
  * 默认配置项导出
  */
 window.WebRTC = window.WebRTC || window.NRTC;
@@ -22,6 +22,9 @@ export default {
     uid: getUid(),
     // 当前直播间名字
     roomName: null,
+    roomId: null,
+    // 当前所在房间
+    room: {},
     // 当前主播的uid,
     hostUid: null,
     // 当前房间成员列表

@@ -2,7 +2,7 @@
  * @Author: lduoduo 
  * @Date: 2018-01-14 20:40:46 
  * @Last Modified by: lduoduo
- * @Last Modified time: 2018-01-25 20:20:41
+ * @Last Modified time: 2018-01-25 22:54:47
  * 信令通信连接SDK
  * 事件注册
  *  signal.on('connected', this.onConnected.bind(this))
@@ -97,20 +97,22 @@ export default class Signal extends Events {
     let send = ws.send;
     // 包装send方法
     ws.send = function(data) {
-      if(ws.readyState !== WebSocket.OPEN){
-        return
+      if (ws.readyState !== WebSocket.OPEN) {
+        return;
       }
-      // send.call(this, data);
       send.call(this, JSON.stringify(data));
-      // console.log(data)
-      console.log(`websocket send: ${data.type}`, data.data);
+      if (data.type !== 'heart') {
+        console.log(`websocket send: ${data.type}`, data.data);
+      }
     };
   }
 
   // 发给自己的消息
   onself(message) {
     const { type, code, data } = message;
-    console.log(`${type} ${code === 200 ? 'success' : 'failed'}`);
+    if (type !== 'heart') {
+      console.log(`${type} ${code === 200 ? 'success' : 'failed'}`);
+    }
 
     this.emit(type, {
       status: code === 200,

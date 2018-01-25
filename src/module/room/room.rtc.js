@@ -2,7 +2,7 @@
  * @Author: lduoduo 
  * @Date: 2018-01-07 19:56:05 
  * @Last Modified by: lduoduo
- * @Last Modified time: 2018-01-21 23:19:21
+ * @Last Modified time: 2018-01-26 00:50:16
  * 
  * room的扩展脚本，主要融合rtc
  */
@@ -87,6 +87,7 @@ export default {
         Alert({
           msg: err.stack || err
         });
+        that.leaveRoom();
         return Promise.reject();
       });
   },

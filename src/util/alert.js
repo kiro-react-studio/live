@@ -3,7 +3,7 @@
  * @Author: lduoduo 
  * @Date: 2018-01-12 16:04:00 
  * @Last Modified by: lduoduo
- * @Last Modified time: 2018-01-20 21:54:13
+ * @Last Modified time: 2018-01-25 23:48:27
  */
 
 import { WeuiDialogCtrl } from 'weui/dialog';
@@ -15,7 +15,7 @@ import { WeuiDialogCtrl } from 'weui/dialog';
  * @param {*} option
  */
 export default function(option = {}) {
-  const { msg, btns } = option;
+  const { title, msg, btns } = option;
   const footer = [];
   btns &&
     btns.map(item => {
@@ -35,6 +35,7 @@ export default function(option = {}) {
     });
   }
   WeuiDialogCtrl.show({
+    header: title,
     body: msg.constructor === String ? msg : JSON.stringify(msg),
     footer
   });

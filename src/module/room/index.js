@@ -2,7 +2,7 @@
  * @Author: lduoduo 
  * @Date: 2018-01-13 23:37:00 
  * @Last Modified by: lduoduo
- * @Last Modified time: 2018-01-25 21:02:24
+ * @Last Modified time: 2018-01-25 23:48:51
  * 进入直播间
  */
 import { h, Component } from 'preact';
@@ -68,17 +68,7 @@ class RoomDetail extends Component {
       return;
     }
     // 加入房间
-
     this.join();
-
-    // if (!RtcStatus.calling) {
-    //   // 开始直播
-    //   return this.joinChannel()
-    //     .then(() => {
-    //       RtcConfig.setCalling(true);
-    //     })
-    //     .catch(err => err && console.error(err));
-    // }
   }
 
   join() {
@@ -86,33 +76,15 @@ class RoomDetail extends Component {
     this.initRoom()
       .then(() => this.initRtc())
       .catch(err => {
-        if (err.constructor === Object) {
-          err.msg = '加入房间失败';
-        }
-        err = err + '加入房间失败';
+        console.error('加入房间失败', err)
         Alert({
+          title: '加入房间失败',
           msg: err
         });
         this.leaveRtc();
         this.leaveRoom();
         route('/');
       });
-  }
-  // // 初始化加入rtc房间
-  // initRtc() {
-
-  // }
-
-  renderOption() {
-    console.log('this.state.showOption', this.state.showOption);
-    return this.state.showOption ? (
-      <Option onConfirm={e => this.toggleOption(false)} />
-    ) : (
-      <OptionMini
-        onClick={e => this.toggleOption(true)}
-        onLeave={this.onLeave}
-      />
-    );
   }
 
   render() {

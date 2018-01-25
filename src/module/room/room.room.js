@@ -2,7 +2,7 @@
  * @Author: lduoduo 
  * @Date: 2018-01-07 19:56:05 
  * @Last Modified by: lduoduo
- * @Last Modified time: 2018-01-21 13:23:50
+ * @Last Modified time: 2018-01-25 23:50:33
  * 
  * room的扩展脚本，主要融合room房间管理
  */
@@ -32,6 +32,7 @@ export default {
       data => {
         const role =
           data.scene === 1 || data.hostUid === RoomStatus.uid ? 0 : 1;
+        RoomConfig.setRoom(data);
         RoomConfig.setCalling(true);
         RoomConfig.setRole(role);
         RtcConfig.setRole(role);

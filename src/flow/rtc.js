@@ -2,7 +2,7 @@
  * @Author: lduoduo 
  * @Date: 2018-01-07 15:49:41 
  * @Last Modified by: lduoduo
- * @Last Modified time: 2018-01-25 00:49:51
+ * @Last Modified time: 2018-01-26 00:55:05
  * rtc功能合集，输出单实例，引用了mobx状态管理
  * 组件调用方式:
  * 1. import {Rtc} from 'flow'
@@ -16,8 +16,9 @@
 window.WebRTC = window.WebRTC || window.NRTC;
 import { Events, Pipes } from 'util';
 
-import { RtcConfig } from 'store.action';
+import { RtcConfig, RoomConfig } from 'store.action';
 const Status = RtcConfig.data;
+const RoomStatus = RoomConfig.data;
 
 const event = new Events();
 
@@ -136,17 +137,10 @@ let rtc = {
     webrtc.on('joinChannel', function(obj) {
       console.log('user join', obj);
       that.startDeviceAudioOutChat();
-      that.webrtc
-        .startRemoteStream({
-          account: obj.account,
-          uid: obj.uid,
-          node: Status.nodeRemote
-        })
-        .catch(function(err) {
-          console.log('开启远端画面失败', err);
-        });
-      that.setVideoViewRemoteSize();
     });
+    webrtc.on('remoteTrack', function(obj){
+      obj.track.kind === 'video' && that.startRemoteStream(obj)
+    })
     webrtc.on('leaveChannel', function(obj) {
       console.log('sb leaveChannel', obj);
       var param = {};
@@ -392,11 +386,13 @@ let rtc = {
 
     const arrFn = [];
     // 自动打开设备
-    if (Status.cameraEnable) {
-      arrFn.push(that.startDeviceVideo.bind(that));
-    }
-    if (Status.microEnable) {
-      arrFn.push(that.startDeviceAudioIn.bind(that));
+    if (Status.autoStart) {
+      if (Status.cameraEnable) {
+        arrFn.push(that.startDeviceVideo.bind(that));
+      }
+      if (Status.microEnable) {
+        arrFn.push(that.startDeviceAudioIn.bind(that));
+      }
     }
 
     promise = Pipes(arrFn);
@@ -411,7 +407,6 @@ let rtc = {
       })
       .then(function() {
         that.setVideoViewSize();
-        that.setVideoViewRemoteSize();
       })
       .catch(function(e) {
         console.log('连接出错', e);
@@ -853,7 +848,7 @@ let rtc = {
   setVideoViewSize: function() {
     this.webrtc.setVideoViewSize(Status.videoViewSize);
   },
-  setVideoViewRemoteSize: function() {
+  setVideoViewRemoteSize: function(obj) {
     var param = {};
     if (Status.targetAccount) {
       param.account = Status.targetAccount;
@@ -862,10 +857,11 @@ let rtc = {
       param.uid = Status.targetUid;
     }
     param = Object.assign(param, Status.videoViewRemoteSize);
+    const tmp = obj || param
     this.webrtc
-      .setVideoViewRemoteSize(param)
+      .setVideoViewRemoteSize(tmp)
       .then(() => {
-        console.log('设置对方画面大小--->:', param);
+        console.log('设置对方画面大小--->:', tmp);
       })
       .catch(function(err) {
         console.log(err);
@@ -891,25 +887,23 @@ let rtc = {
       this.webrtc.stopLocalStream();
     }
   },
-  startRemoteStream: function() {
+  startRemoteStream: function(obj) {
+    const local = obj.uid === +RoomStatus.room.hostUid;
+    const size = local ? Status.videoViewSize : Status.videoViewRemoteSize;
     var param = {
-      node: Status.nodeRemote
+      account: obj.account,
+      uid: obj.uid,
+      node: local ? Status.nodeLocal : Status.nodeRemote
     };
-    if (Status.targetAccount) {
-      param.account = Status.targetAccount;
-    }
-    if (Status.targetUid) {
-      param.uid = Status.targetUid;
-    }
     if (this.webrtc) {
       this.webrtc
         .startRemoteStream(param)
         .then(function() {
           console.log('显示对方画面--->:', param);
-          this.setVideoViewRemoteSize();
+          this.setVideoViewRemoteSize(Object.assign(obj, size));
         })
         .catch(function(err) {
-          console.log(err);
+          console.log('开启远端画面失败', err);
         });
     }
   },
